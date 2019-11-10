@@ -1,0 +1,9 @@
+﻿  Running VPC CRC Check - particles_dll.vpc
+  particles_dll.cpp
+     Creating library .\Debug\.\particles_dll.lib and object .\Debug\.\particles_dll.exp
+memoverride.obj : error LNK2019: unresolved external symbol _memcpy referenced in function "void * __cdecl MemAlloc_ReallocAligned(void *,unsigned int,unsigned int)" (?MemAlloc_ReallocAligned@@YAPAXPAXII@Z)
+memoverride.obj : error LNK2019: unresolved external symbol _memset referenced in function __aligned_offset_recalloc_dbg
+memoverride.obj : error LNK2019: unresolved external symbol _strlen referenced in function __strdup
+memoverride.obj : error LNK2019: unresolved external symbol __vsnprintf referenced in function __CrtDbgReport
+LINK : error LNK2001: unresolved external symbol __DllMainCRTStartup@12
+.\Debug\.\\particles_dll.dll : fatal error LNK1120: 5 unresolved externals

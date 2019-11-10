@@ -1,0 +1,11 @@
+﻿  blobulator_link_test.cpp
+d:\development\paint-game\vpc\src\common\blobulator\implicit\impparticle.h(15): error C2220: warning treated as error - no 'object' file generated
+d:\development\paint-game\vpc\src\common\blobulator\implicit\impparticle.h(15): warning C4200: nonstandard extension used : zero-sized array in struct/union
+          Cannot generate copy-ctor or copy-assignment operator when UDT contains a zero-sized array
+d:\development\paint-game\vpc\src\common\blobulator\implicit\imprenderer.h(12): error C2143: syntax error : missing ';' before '*'
+d:\development\paint-game\vpc\src\common\blobulator\implicit\imprenderer.h(12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\development\paint-game\vpc\src\common\blobulator\implicit\imprenderer.h(12): warning C4183: 'getRenderer': missing return type; assumed to be a member function returning 'int'
+d:\development\paint-game\vpc\src\common\blobulator\implicit\imprenderer.h(13): error C2061: syntax error : identifier 'SweepRenderer'
+d:\development\paint-game\vpc\src\common\blobulator\implicit\imprenderer.h(17): error C2504: 'RenderableInstance_t' : base class undefined
+d:\development\paint-game\vpc\src\common\blobulator\implicit\sweeprenderer.h(39): error C2535: 'void SweepRenderer::addParticle(ImpParticle *,bool)' : member function already defined or declared
+          d:\development\paint-game\vpc\src\common\blobulator\implicit\sweeprenderer.h(22) : see declaration of 'SweepRenderer::addParticle'

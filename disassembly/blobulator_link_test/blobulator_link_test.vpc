@@ -1,0 +1,31 @@
+//-----------------------------------------------------------------------------
+//	BLOBULATOR_LINK_TEST.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR		"..\..\..\.."
+$Macro OUTBINDIR	"bin"
+
+$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+
+$Configuration
+{
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\common"
+	}
+}
+
+$Project "blobulator_link_test"
+{
+	$Folder	"Source Files"
+	{
+		$File	"blobulator_link_test.cpp"
+	}
+
+	$Folder	"Link Libraries"
+	{
+		$Lib	blobulator				
+	}
+}

@@ -1,0 +1,31 @@
+//-----------------------------------------------------------------------------
+//	PARTICLES_DLL.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR		"..\..\..\.."
+$Macro OUTBINDIR	"..\bin"
+
+$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+
+$Configuration
+{
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\common"
+	}
+}
+
+$Project "particles_dll"
+{
+	$Folder	"Source Files"
+	{
+		$File	"particles_dll.cpp"
+	}
+
+	$Folder	"Link Libraries"
+	{
+		$Lib	particles
+	}
+}
