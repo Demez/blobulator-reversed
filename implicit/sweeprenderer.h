@@ -9,15 +9,11 @@
 #include "blobulator/point3d.h"
 #include "blobulator/smartarray.h"
 
+#ifndef RENDERER_CLASS
 #define RENDERER_CLASS SweepRenderer
+#endif
 
 // TODO: Find missing members of SweepRenderer (and maybe functions)
-
-/*
-	The following structs are accurate other than
-	maybe the suspciious bit field in Slice_t.
-*/
-
 // TODO: Remove these to their respective files
 
 struct YZ
@@ -45,11 +41,21 @@ union DECL_ALIGN(4) CubeInfo
 // 40 bits
 struct Slice_t
 {
-	CubeInfo* corners[101];					/* offset: 0  */
-	bool b1, b2, b3, b4, b5, b6, b7, b8, 	/* offset: 4-15 */
-		b9, b10, b11, b12, b13, b14, b15, b16; // this isn't a bit-field woops
-	SmartArray<YZ, 0, 0> todo_list;			/* offset: 16 */
-	SmartArray<YZ, 0, 16> seed_list;		/* offset: 28 */
+	CubeInfo* corners[101];					/* offset: 0	*/
+	unsigned char field_0x4;				/* offset: 4-15 */
+	unsigned char field_0x5;
+	unsigned char field_0x6;
+	unsigned char field_0x7;
+	unsigned char field_0x8;
+	unsigned char field_0x9;
+	unsigned char field_0xa;
+	unsigned char field_0xb;
+	unsigned char field_0xc;
+	unsigned char field_0xd;
+	unsigned char field_0xe;
+	unsigned char field_0xf;
+	SmartArray<YZ, 0, 0> todo_list;			/* offset: 16	*/
+	SmartArray<YZ, 0, 16> seed_list;		/* offset: 28	*/
 };
 
 struct DECL_ALIGN(2) vbId_t
@@ -77,12 +83,10 @@ struct DECL_ALIGN(4) IndexTriVertexBuffer
 	unsigned short m_stat_no_flashes;
 };
 
-struct ImpTile;
-
-typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*) tCalcCornerFunc;
-typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*) tCalcSign2Func;
-typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*) tCalcSignFunc;
-typedef void (*)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*) tCalcVertexFunc;
+typedef void (*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
+typedef void (*tCalcVertexFunc)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*);
 
 class SweepRenderer
 {
@@ -105,8 +109,6 @@ public:
 
 	void beginTile(ImpTile*);
 	void endTitle();
-
-	void addParticle(ImpParticle*, bool);
 
 	Point3D* getInnerDimensions();
 
@@ -144,63 +146,63 @@ public:
 	int maxNoSlicesToDraw;
 	int last_slice_drawn;
 	bool polygonizationEnabled;
-	undefined field_0x11;
-	undefined field_0x12;
-	undefined field_0x13;
-	undefined field_0x14;
-	undefined field_0x15;
-	undefined field_0x16;
-	undefined field_0x17;
-	undefined field_0x18;
-	undefined field_0x19;
-	undefined field_0x1a;
-	undefined field_0x1b;
-	undefined field_0x1c;
-	undefined field_0x1d;
-	undefined field_0x1e;
-	undefined field_0x1f;
+	unsigned char field_0x11;
+	unsigned char field_0x12;
+	unsigned char field_0x13;
+	unsigned char field_0x14;
+	unsigned char field_0x15;
+	unsigned char field_0x16;
+	unsigned char field_0x17;
+	unsigned char field_0x18;
+	unsigned char field_0x19;
+	unsigned char field_0x1a;
+	unsigned char field_0x1b;
+	unsigned char field_0x1c;
+	unsigned char field_0x1d;
+	unsigned char field_0x1e;
+	unsigned char field_0x1f;
 	Point3D offset;
 	Point3D outerBBMins;
 	Point3D outerBBMaxs;
 	Point3D innerBBMins;
 	Point3D innerBBMaxs;
-	undefined field_0x70;
-	undefined field_0x71;
-	undefined field_0x72;
-	undefined field_0x73;
-	undefined field_0x74;
-	undefined field_0x75;
-	undefined field_0x76;
-	undefined field_0x77;
-	undefined field_0x78;
-	undefined field_0x79;
-	undefined field_0x7a;
-	undefined field_0x7b;
+	unsigned char field_0x70;
+	unsigned char field_0x71;
+	unsigned char field_0x72;
+	unsigned char field_0x73;
+	unsigned char field_0x74;
+	unsigned char field_0x75;
+	unsigned char field_0x76;
+	unsigned char field_0x77;
+	unsigned char field_0x78;
+	unsigned char field_0x79;
+	unsigned char field_0x7a;
+	unsigned char field_0x7b;
 	Slice_t slices[102];
-	undefined field_0x106c;
-	undefined field_0x106d;
-	undefined field_0x106e;
-	undefined field_0x106f;
-	undefined field_0x1070;
-	undefined field_0x1071;
-	undefined field_0x1072;
-	undefined field_0x1073;
-	undefined field_0x1074;
-	undefined field_0x1075;
-	undefined field_0x1076;
-	undefined field_0x1077;
-	undefined field_0x1078;
-	undefined field_0x1079;
-	undefined field_0x107a;
-	undefined field_0x107b;
-	undefined field_0x107c;
-	undefined field_0x107d;
-	undefined field_0x107e;
-	undefined field_0x107f;
-	undefined field_0x1080;
-	undefined field_0x1081;
-	undefined field_0x1082;
-	undefined field_0x1083;
+	unsigned char field_0x106c;
+	unsigned char field_0x106d;
+	unsigned char field_0x106e;
+	unsigned char field_0x106f;
+	unsigned char field_0x1070;
+	unsigned char field_0x1071;
+	unsigned char field_0x1072;
+	unsigned char field_0x1073;
+	unsigned char field_0x1074;
+	unsigned char field_0x1075;
+	unsigned char field_0x1076;
+	unsigned char field_0x1077;
+	unsigned char field_0x1078;
+	unsigned char field_0x1079;
+	unsigned char field_0x107a;
+	unsigned char field_0x107b;
+	unsigned char field_0x107c;
+	unsigned char field_0x107d;
+	unsigned char field_0x107e;
+	unsigned char field_0x107f;
+	unsigned char field_0x1080;
+	unsigned char field_0x1081;
+	unsigned char field_0x1082;
+	unsigned char field_0x1083;
 	SmartArray<SmartArray<YZ, 0, 0>, 0, 16> unused_todo_lists;
 	int n_alloced_slice_corners;
 	int n_alloced_slice_corner_infos;

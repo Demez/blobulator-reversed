@@ -18,10 +18,20 @@ struct PCacheElem_t
 
 struct PSliceData_t
 {
-	uint zArray[101];
+	unsigned int zArray[101];
 	SmartArray<PCacheElem_t, 0, 16> cacheElements;
-	bool b1, b2, b3, b4, b5, b6, 
-		b7, b8, b9, b10, b11, b12; // not a bit field woops
+	unsigned char field_0x1a0;
+	unsigned char field_0x1a1;
+	unsigned char field_0x1a2;
+	unsigned char field_0x1a3;
+	unsigned char field_0x1a4;
+	unsigned char field_0x1a5;
+	unsigned char field_0x1a6;
+	unsigned char field_0x1a7;
+	unsigned char field_0x1a8;
+	unsigned char field_0x1a9;
+	unsigned char field_0x1aa;
+	unsigned char field_0x1ab;
 	int max_cache_elements_size;
 };
 
