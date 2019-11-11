@@ -8,9 +8,16 @@
 // 24 bits
 struct ImpParticle
 {
+	ImpParticle();
+
 	Point3D center;			/* offset: 0	*/
 	float fieldRScaleSQ;	/* offset: 16	*/
 	float scale;			/* offset: 20	*/
+	float interpolants[];
+
+	int group;
+
+	void setFieldScale(float scale);
 };
 
 // 48 bits
