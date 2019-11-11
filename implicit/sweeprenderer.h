@@ -6,8 +6,22 @@
 
 #define RENDERER_CLASS SweepRenderer
 
-// TODO: Finish defining Slice_t
 // TODO: Find missing members of SweepRenderer (and maybe functions)
+
+/*
+	The following structs are accurate other than
+	maybe the suspciious bit field in Slice_t.
+*/
+
+struct YZ
+{
+	uchar y, z;
+};
+
+struct XYZ
+{
+	uchar x, y, z;
+};
 
 struct CubeInfo_s_0
 {
@@ -19,7 +33,7 @@ union CubeInfo
 {
 	CubeInfo_s_0 _s_0;
 	uint everything;
-} align();
+} align(); // TODO: what does this mean?
 
 // 40 bits
 struct Slice_t
@@ -35,7 +49,7 @@ struct vbId_t
 {
 	ushort time;
 	ushort id;
-} align();
+} align(); // TODO: what does this mean?
 
 struct CornerInfo
 {
@@ -47,10 +61,17 @@ struct CornerInfo
 	uchar dones;
 } align();
 
-class IndexTriVertexBuffer;
-class ImpParticle;
-class ImpTile;
-class Point3D;
+struct IndexTriVertexBuffer
+{
+	ushort m_curTime;
+	ushort m_nVerticesOutput;
+	IMesh* m_pMesh;
+	CMeshBuilder* m_pBuilder;
+	ushort m_stat_no_flashes;
+};
+
+struct ImpParticle;
+struct ImpTile;
 
 typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*) tCalcCornerFunc;
 typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*) tCalcSign2Func;
