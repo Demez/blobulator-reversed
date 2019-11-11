@@ -20,22 +20,8 @@ struct PSliceData_t
 {
 	uint zArray[101];
 	SmartArray<PCacheElem_t, 0, 16> cacheElements;
-	/*
-	I assume the 12 individual bits shown in Ghidra's
-	Structure Editor here is a bit field of 12 bits
-	*/
-	bool b1 : 1;
-	bool b2 : 1;
-	bool b3 : 1;
-	bool b4 : 1;
-	bool b5 : 1;
-	bool b6 : 1;
-	bool b7 : 1;
-	bool b8 : 1;
-	bool b9 : 1;
-	bool b10 : 1;
-	bool b11 : 1;
-	bool b12 : 1;
+	bool b1, b2, b3, b4, b5, b6, 
+		b7, b8, b9, b10, b11, b12; // not a bit field woops
 	int max_cache_elements_size;
 };
 

@@ -37,8 +37,7 @@ public:
 };
 
 // TODO: Is this a class or a struct?
-// TODO: This undefined stuff could be a potential bit-field?
-// 68 bits
+// 68 bytes
 struct ImpTile
 {
     bool done;
