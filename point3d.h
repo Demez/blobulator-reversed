@@ -1,5 +1,13 @@
 #pragma once
 
+// Point3D_u_0 is suspicious
+
+union Point3D_u_0
+{
+	__m128 sse_vec;
+	float p[4];
+};
+
 class Point3D
 {
 public:
@@ -26,4 +34,6 @@ public:
 	float unit();
 
 	void set(int, int, int);
+	
+	Point3D_u_0 _u_0; // no name? is it meant to be private?
 };
