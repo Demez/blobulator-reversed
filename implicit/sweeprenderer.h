@@ -9,29 +9,44 @@
 // TODO: Finish defining Slice_t
 // TODO: Find missing members of SweepRenderer (and maybe functions)
 
-struct Slice_t
+struct CubeInfo_s_0
 {
-	Slice_t()
-	{
-		d7 = 16;
-	}
-	~Slice_t()
-	{
-		free(&d7); // 28
-		free(p); // 8
-		if (d1 != 0)
-		{
-			(**(code * *)(**(int**)g_pMemAlloc_exref + 0x14))(*(undefined4*)((*(uint*)& this->field_0x4 & 0xfffffffc) - 4));
-			*(g_pMemAlloc + 20)(((this + 4) & 0xFFFFFFFC) - 4);
-		}
-	}
-
-	void* p;
-	uint d1, d2, d3, d4, d5, d6, d7;
-	uint data
+	ushort cornerInfoNo;
+	bool doneAbove, doneBelow : 1;
 };
 
-struct CornerInfo;
+union CubeInfo
+{
+	CubeInfo_s_0 _s_0;
+	uint everything;
+} align();
+
+// 40 bits
+struct Slice_t
+{
+	CubeInfo* corners[101];					/* offset: 0  */
+	bool b1, b2, b3, b4, b5, b6, b7, b8, 	/* offset: 4-15 */
+	b9, b10, b11, b12, b13, b14, b15, b16 : 1;
+	SmartArray<YZ, 0, 0> todo_list;			/* offset: 16 */
+	SmartArray<YZ, 0, 16> seed_list;		/* offset: 28 */
+};
+
+struct vbId_t
+{
+	ushort time;
+	ushort id;
+} align();
+
+struct CornerInfo
+{
+	float value;
+	float normal[3];
+	vbId_t edges[3];
+	CornerInfo* next;
+	uchar x, y, z;
+	uchar dones;
+} align();
+
 class IndexTriVertexBuffer;
 class ImpParticle;
 class ImpTile;
