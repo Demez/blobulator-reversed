@@ -1,0 +1,13 @@
+*.gpr
+*.dll
+*.lib
+*.pdb
+*.ilk
+
+bin
+Debug
+Release
+
+*.vcxproj.*
+
+*.vpc.*
