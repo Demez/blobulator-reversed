@@ -4,6 +4,8 @@
 *.pdb
 *.ilk
 
+!disassembly/lib/*.lib
+
 bin
 Debug
 Release
