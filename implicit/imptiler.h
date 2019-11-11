@@ -36,11 +36,35 @@ public:
 	Point3D getTileOffset(int);
 };
 
-class ImpTile
+// TODO: Is this a class or a struct?
+// TODO: This undefined stuff could be a potential bit-field?
+// 68 bits
+struct ImpTile
 {
-public:
-	ImpTile(int, int, int);
-	~ImpTile();
+    bool done;
+    undefined field_0x1;
+    undefined field_0x2;
+    undefined field_0x3;
+    int x, y, z;
+    Point3D center;
+    bool old_tile;
+    undefined field_0x21;
+    undefined field_0x22;
+    undefined field_0x23;
+    undefined field_0x24;
+    undefined field_0x25;
+    undefined field_0x26;
+    undefined field_0x27;
+    undefined field_0x28;
+    undefined field_0x29;
+    undefined field_0x2a;
+    undefined field_0x2b;
+    undefined field_0x2c;
+    undefined field_0x2d;
+    undefined field_0x2e;
+    undefined field_0x2f;
+    Point3D debug_color;
+    float dist;
 };
 
 class ImpTilerFactory

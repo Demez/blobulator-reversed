@@ -1,6 +1,7 @@
 #pragma once
 
 #include "blobulator/implicit/imptiler.h"
+#include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/projectingparticlecache.h"
 #include "blobulator/point3d.h"
 
@@ -12,6 +13,8 @@
 	The following structs are accurate other than
 	maybe the suspciious bit field in Slice_t.
 */
+
+// TODO: Remove these to their respective files
 
 struct YZ
 {
@@ -70,7 +73,6 @@ struct IndexTriVertexBuffer
 	ushort m_stat_no_flashes;
 };
 
-struct ImpParticle;
 struct ImpTile;
 
 typedef void (*)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*) tCalcCornerFunc;

@@ -1,10 +1,9 @@
 #pragma once
 
-// TODO: Is ImpParticle a struct or a class?
 // TODO: Is this accurate code?
 
 // 16 bits
-class Point3D;
+#include "blobulator/point3d.h"
 
 // 24 bits
 struct ImpParticle
