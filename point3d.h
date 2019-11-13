@@ -29,11 +29,22 @@ public:
 	Point3D* operator/(float);
 
 	float* operator[](int);
-	float operator[](int);
+	const float operator[](int) const;
 
 	float unit();
 
 	void set(int, int, int);
 	
 	Point3D_u_0 _u_0; // no name? is it meant to be private?
+};
+
+
+struct YZ
+{
+	unsigned char y, z;
+};
+
+struct XYZ
+{
+	unsigned char x, y, z;
 };

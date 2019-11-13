@@ -1,10 +1,15 @@
 #pragma once
 
+#include "iclientrenderable.h"
+
 #include "blobulator/point3d.h"
-#include "blobulator/implicit/imprenderer.h"
+#include "blobulator/implicit/sweeprenderer.h"
 
+#ifndef RENDERER_CLASS
 #define RENDERER_CLASS ImpRenderer
+#endif
 
+// TODO: Finish
 class ImpRendererFactory
 {
 public:
@@ -14,6 +19,7 @@ public:
 	void returnRenderer(SweepRenderer*);
 };
 
+// TODO: Finish
 class ImpRenderer : public RenderableInstance_t
 {
 public:

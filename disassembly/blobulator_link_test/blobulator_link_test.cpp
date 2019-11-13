@@ -1,3 +1,3 @@
-#include "blobulator/Implicit/SweepRenderer.h"
+#include "blobulator/implicit/sweeprenderer.h"
 
 SweepRenderer sweepRendererTest;
