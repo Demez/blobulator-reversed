@@ -1,14 +1,8 @@
 #pragma once
 
-// Point3D_u_0 is suspicious
+#include "tier0/platform.h"
 
-union Point3D_u_0
-{
-	__m128 sse_vec;
-	float p[4];
-};
-
-class Point3D
+DECL_ALIGN(4) struct Point3D
 {
 public:
 
@@ -35,16 +29,25 @@ public:
 
 	void set(int, int, int);
 	
-	Point3D_u_0 _u_0; // no name? is it meant to be private?
+	DECL_ALIGN(4) union
+	{
+		__m128 sse_vec;
+		float p[4];
+	};
 };
 
-
-struct YZ
+DECL_ALIGN(1) struct YZ
 {
 	unsigned char y, z;
 };
 
-struct XYZ
+DECL_ALIGN(1) struct XYZ
 {
 	unsigned char x, y, z;
+};
+
+DECL_ALIGN(1) struct pcache_YZ_t
+{
+	unsigned char y;
+	unsigned char z;
 };

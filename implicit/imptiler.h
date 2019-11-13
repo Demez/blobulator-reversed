@@ -4,7 +4,8 @@
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/sweeprenderer.h"
 
-class ImpTile;
+struct ImpTile;
+class SweepRenderer;
 
 class ImpTiler
 {
@@ -35,12 +36,10 @@ public:
 	Point3D getTileOffset(int);
 };
 
-// TODO: Is this a class or a struct?
 // 68 bytes
 struct ImpTile
 {
 	ImpTile(int, int, int);
-	~ImpTile(unsigned int);
 	~ImpTile();
 
     bool done;

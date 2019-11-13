@@ -2,6 +2,8 @@
 
 // TODO: I don't know where these are actually meant to be defined
 
+#include "blobulator/smartarray.h"
+
 struct ImpParticle;
 
 // NOTE: The following types I believe are accurate
@@ -39,3 +41,12 @@ struct PCacheSlice_t
 {
 	PSliceData_t* sliceData;
 };
+
+struct CornerInfo;
+struct IndexTriVertexBuffer;
+class ProjectingParticleCache;
+
+typedef void (*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
+typedef void (*tCalcVertexFunc)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*);

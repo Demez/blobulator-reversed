@@ -6,6 +6,7 @@
 #include "blobulator/implicit/imptiler.h"
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/projectingparticlecache.h"
+#include "blobulator/implicit/userfunctions.h"
 #include "blobulator/point3d.h"
 #include "blobulator/smartarray.h"
 
@@ -16,15 +17,13 @@
 // TODO: Find missing members of SweepRenderer (and maybe functions)
 // TODO: Remove these to their respective files
 
-struct CubeInfo_s_0
+DECL_ALIGN(4) union CubeInfo
 {
-	unsigned short cornerInfoNo;
-	bool doneAbove, doneBelow : 1;
-};
-
-union DECL_ALIGN(4) CubeInfo
-{
-	CubeInfo_s_0 _s_0;
+	DECL_ALIGN(2) struct
+	{
+		unsigned short cornerInfoNo;
+		bool doneAbove, doneBelow : 1;
+	};
 	unsigned int everything;
 };
 
@@ -48,13 +47,13 @@ struct Slice_t
 	SmartArray<YZ, 0, 16> seed_list;		/* offset: 28	*/
 };
 
-struct DECL_ALIGN(2) vbId_t
+DECL_ALIGN(2) struct vbId_t
 {
 	unsigned short time;
 	unsigned short id;
 };
 
-struct DECL_ALIGN(4) CornerInfo
+DECL_ALIGN(4) struct CornerInfo
 {
 	float value;
 	float normal[3];
@@ -64,7 +63,7 @@ struct DECL_ALIGN(4) CornerInfo
 	unsigned char dones;
 };
 
-struct DECL_ALIGN(4) IndexTriVertexBuffer
+DECL_ALIGN(4) struct IndexTriVertexBuffer
 {
 	unsigned short m_curTime;
 	unsigned short m_nVerticesOutput;
@@ -72,11 +71,6 @@ struct DECL_ALIGN(4) IndexTriVertexBuffer
 	CMeshBuilder* m_pBuilder;
 	unsigned short m_stat_no_flashes;
 };
-
-typedef void (*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
-typedef void (*tCalcVertexFunc)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*);
 
 class SweepRenderer
 {

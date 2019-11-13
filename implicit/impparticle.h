@@ -14,19 +14,19 @@ struct ImpParticle
 };
 
 // 48 bits
-struct ImpParticleWithOneInterpolant : ImpParticle
+struct ImpParticleWithOneInterpolant //: ImpParticle
 {
 	Point3D interpolants1;	/* offset: 32	*/
 };
 
 // 64 bits
-struct ImpParticleWithTwoInterpolants : ImpParticleWithOneInterpolant
+struct ImpParticleWithTwoInterpolants //: ImpParticleWithOneInterpolant
 {
 	Point3D interpolants2;	/* offset: 48	*/
 };
 
 // 96 bits
-struct ImpParticleWithFourInterpolants : ImpParticleWithTwoInterpolants
+struct ImpParticleWithFourInterpolants //: ImpParticleWithTwoInterpolants
 {
 	Point3D interpolants3;	/* offset: 64	*/
 	Point3D interpolants4;	/* offset: 80	*/
