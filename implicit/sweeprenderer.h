@@ -79,9 +79,6 @@ public:
 
 	void addParticle(ImpParticle*, bool);
 
-	void changeCubeWidth(float);
-	void changeRadii(float, float);
-
 	void allocSliceCorners(Slice_t*);
 	void allocSliceTodoList(Slice_t*);
 
@@ -96,8 +93,21 @@ public:
 
 	Point3D* getInnerDimensions();
 
-	int getMarginNCubes();
-	float getMarginWidth();
+	bool isParticleWithinBounds(ImpParticle*);
+
+	void recalculateBB();
+	void recalculateDimensions();
+
+	void render_slice(unsigned char, Slice_t*, Slice_t*, Slice_t*);
+	void render_slices();
+
+	void seed_surface(Point3D*);
+
+	static void changeCubeWidth(float);
+	static void changeRadii(float, float);
+
+	static int getMarginNCubes();
+	static float getMarginWidth();
 
 	static void setCubeWidth(float);
 	static float getCubeWidth();
@@ -108,17 +118,7 @@ public:
 	static void setRenderR(float);
 	static float getRenderR();
 
-	bool isParticleWithinBounds(ImpParticle*);
-
-	void setOffset(Point3D*);
-
-	void recalculateBB();
-	void recalculateDimensions();
-
-	void render_slice(unsigned char, Slice_t*, Slice_t*, Slice_t*);
-	void render_slices();
-
-	void seed_surface(Point3D*);
+	static void setOffset(Point3D*);
 
 	static void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
 	static void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
