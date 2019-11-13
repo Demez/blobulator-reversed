@@ -99,14 +99,14 @@ public:
 	int getMarginNCubes();
 	float getMarginWidth();
 
-	void setCubeWidth(float);
-	float getCubeWidth();
+	static void setCubeWidth(float);
+	static float getCubeWidth();
 
-	void setCutoffR(float);
-	float getCutoffR();
+	static void setCutoffR(float);
+	static float getCutoffR();
 
-	void setRenderR(float);
-	float getRenderR();
+	static void setRenderR(float);
+	static float getRenderR();
 
 	bool isParticleWithinBounds(ImpParticle*);
 
@@ -120,10 +120,10 @@ public:
 
 	void seed_surface(Point3D*);
 
-	void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
-	void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
-	void setCalcSignFunc(tCalcSignFunc pfnSignFunc);
-	void setCalcVertexFunc(tCalcVertexFunc pfnVertexFunc);
+	static void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
+	static void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
+	static void setCalcSignFunc(tCalcSignFunc pfnSignFunc);
+	static void setCalcVertexFunc(tCalcVertexFunc pfnVertexFunc);
 
 	ProjectingParticleCache* pCache;
 	IndexTriVertexBuffer* vertexBuffer;

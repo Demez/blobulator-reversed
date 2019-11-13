@@ -10,6 +10,17 @@ class PhysTilerFactory
 
 };
 
+// TODO
+struct PhysTile
+{
+};
+
+// FINISH
+struct PhysTileIterator
+{
+	void reset();
+};
+
 // Do functions
 class PhysTiler
 {

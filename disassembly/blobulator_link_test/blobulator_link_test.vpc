@@ -26,6 +26,7 @@ $Project "blobulator_link_test"
 
 	$Folder	"Link Libraries"
 	{
-		$Lib	blobulator				
+		$Lib	"$LIBCOMMON\blobulator"
+		$Lib	tier2
 	}
 }

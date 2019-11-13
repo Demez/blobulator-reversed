@@ -16,7 +16,7 @@ public:
 	void addParticleToTile(ImpParticle*, int, int, int);
 	void insertParticle(ImpParticle*);
 
-	void beginFrame(Point3D, void*, bool);
+	void beginFrame(Point3D*, void*, bool);
 	void endFrame(void);
 
 	ImpTile* createTile(int, int, int);
