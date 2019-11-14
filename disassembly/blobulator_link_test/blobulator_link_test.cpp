@@ -1,3 +1,5 @@
+#define LINK_TEST
+
 #include "blobulator/implicit/sweeprenderer.h"
 #include "blobulator/point3d.h"
 #include <windows.h>
@@ -14,12 +16,12 @@ int WINAPI WinMain(
 	HINSTANCE hPrevInstance, /* [input] handle to previous instance */
 	LPSTR lpCmdLine,         /* [input] pointer to command line */
 	int nCmdShow             /* [input] show state of window */
+)
 {
 	SweepRenderer* sweep = new SweepRenderer();
 
 	sweep->addParticle(nullptr, false);
 	sweep->changeCubeWidth(0);
-	sweep->changeRadii(0, 0);
 	sweep->allocSliceCorners(nullptr);
 	sweep->allocSliceTodoList(nullptr);
 	sweep->deallocSliceCorners(nullptr);
@@ -27,14 +29,16 @@ int WINAPI WinMain(
 	sweep->beginFrame(false, nullptr);
 	sweep->endFrame();
 	sweep->beginTile(nullptr);
-	sweep->endTitle();
-	sweep->getInnerDimensions();
+	sweep->endTile();
+	SweepRenderer::getInnerDimensions();
 	sweep->isParticleWithinBounds(nullptr);
 	sweep->recalculateBB();
 	sweep->recalculateDimensions();
 	sweep->render_slice(0, nullptr, nullptr, nullptr);
 	sweep->render_slices();
-	sweep->seed_surface(nullptr);
+	sweep->seed_surface(Point3D());
+	sweep->setOffset(Point3D());
+	SweepRenderer::changeRadii(0, 0);
 	SweepRenderer::getMarginNCubes();
 	SweepRenderer::getMarginWidth();
 	SweepRenderer::setCalcCornerFunc(nullptr);
@@ -47,7 +51,6 @@ int WINAPI WinMain(
 	SweepRenderer::getCutoffR();
 	SweepRenderer::setRenderR(0);
 	SweepRenderer::getRenderR();
-	SweepRenderer::setOffset(nullptr);
 }
 #elif defined(POINT3D_TEST)
 int WINAPI WinMain(

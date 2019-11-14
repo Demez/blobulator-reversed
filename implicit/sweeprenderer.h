@@ -10,6 +10,11 @@
 #include "blobulator/point3d.h"
 #include "blobulator/smartarray.h"
 
+#ifdef LINK_TEST
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#endif
+
 #ifndef RENDERER_CLASS
 #define RENDERER_CLASS SweepRenderer
 #endif
@@ -74,35 +79,25 @@ DECL_ALIGN(4) struct IndexTriVertexBuffer
 
 class SweepRenderer
 {
-	friend class main;
+#ifdef LINK_TEST
+	friend int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
+#endif
 public:
 	SweepRenderer();
 
 	void addParticle(ImpParticle*, bool);
 
-	void allocSliceCorners(Slice_t*);
-	void allocSliceTodoList(Slice_t*);
-
-	void deallocSliceCorners(Slice_t*);
-	void deallocSliceTodoList(Slice_t*);
-
 	void beginFrame(bool, void *);
 	void endFrame();
 
 	void beginTile(ImpTile*);
-	void endTitle();
+	void endTile();
 
-	Point3D* getInnerDimensions();
+	static Point3D& getInnerDimensions();
 
 	bool isParticleWithinBounds(ImpParticle*);
 
-	void render_slice(unsigned char, Slice_t*, Slice_t*, Slice_t*);
-	void render_slices();
-
-	void seed_surface(Point3D*);
-
-	static void changeCubeWidth(float);
-	static void changeRadii(float, float);
+	void setOffset(Point3D&);
 
 	static int getMarginNCubes();
 	static float getMarginWidth();
@@ -116,9 +111,21 @@ public:
 	static void setRenderR(float);
 	static float getRenderR();
 
-	static void setOffset(Point3D*);
-
 private:
+
+	void allocSliceCorners(Slice_t*);
+	void allocSliceTodoList(Slice_t*);
+
+	void deallocSliceCorners(Slice_t*);
+	void deallocSliceTodoList(Slice_t*);
+
+	static void changeRadii(float, float);
+	static void changeCubeWidth(float);
+
+	void render_slice(unsigned char, Slice_t*, Slice_t*, Slice_t*);
+	void render_slices();
+
+	void seed_surface(Point3D&);
 
 	static void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
 	static void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
