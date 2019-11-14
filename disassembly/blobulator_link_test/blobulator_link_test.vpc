@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 $Macro SRCDIR		"..\..\..\.."
-$Macro OUTBINDIR	"bin"
+$Macro OUTBINDIR	"$SRCDIR\common\blobulator\disassembly\blobulator_link_test\bin"
 
 $Include "$SRCDIR\vpc_scripts\source_exe_base.vpc"
 

@@ -86,6 +86,12 @@ public:
 	static void setRenderR(float);
 	static float getRenderR();
 
+	static void setCalcCornerFunc(int, CalcCornerFunc);
+	static void setCalcSign2Func(CalcSign2Func);
+	static void setCalcSignFunc(CalcSignFunc);
+	static void setCalcVertexFunc(CalcVertexFunc);
+
+
 private:
 
 	void allocSliceCorners(Slice_t*);
@@ -101,11 +107,6 @@ private:
 	void render_slices();
 
 	void seed_surface(Point3D&);
-
-	static void setCalcCornerFunc(CalcCornerFunc);
-	static void setCalcSign2Func(CalcSign2Func);
-	static void setCalcSignFunc(CalcSignFunc);
-	static void setCalcVertexFunc(CalcVertexFunc);
 
 	static void recalculateDimensions();
 

@@ -20,7 +20,7 @@ int WINAPI WinMain(
 {
 	SweepRenderer* sweep = new SweepRenderer();
 
-	sweep->addParticle(nullptr, false);
+	sweep->addParticle(&ImpParticle(), false);
 	sweep->changeCubeWidth(0);
 	sweep->allocSliceCorners(nullptr);
 	sweep->allocSliceTodoList(nullptr);
@@ -41,7 +41,7 @@ int WINAPI WinMain(
 	SweepRenderer::changeRadii(0, 0);
 	SweepRenderer::getMarginNCubes();
 	SweepRenderer::getMarginWidth();
-	SweepRenderer::setCalcCornerFunc(nullptr);
+	SweepRenderer::setCalcCornerFunc(0, nullptr);
 	SweepRenderer::setCalcSign2Func(nullptr);
 	SweepRenderer::setCalcSignFunc(nullptr);
 	SweepRenderer::setCalcVertexFunc(nullptr);
@@ -72,7 +72,6 @@ int WINAPI WinMain(
 	p3d / 0.0f;
 	{ float f = p3d[0]; }
 	p3d.set(0, 0, 0);
-//	p3d.unit();
 }
 #endif
 
