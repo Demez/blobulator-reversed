@@ -18,7 +18,11 @@ struct PhysTile
 // FINISH
 struct PhysTileIterator
 {
+	PhysTilerIterator(PhysTiler*);
 	void reset();
+
+private:
+	PhysTileIterator(PhysTileIterator*); // no copy constructor
 };
 
 // Do functions
@@ -27,6 +31,28 @@ class PhysTiler
 public:
 	PhysTiler(PhysParticleCache*);
 	PhysTiler(float, float);
+
+	PhysTileIterator* acquireIterator();
+	void releaseIterator(PhysTileIterator*);
+
+	void beginFrame(Point3D*);
+	void beginIteration();
+
+	void endFrame();
+	void endIteration();
+
+	PhysTile* createTile(int, int, int);
+
+	Point3D* calcTileCorner(int, int, int);
+	Point3D* calcTileOffset(int, int, int);
+
+	PhysTile* findTile(int, int, int);
+
+	PhysParticle* getNextParticleAndNeighbors(PhysParticle***, int*);
+
+	void insertParticle(PhysParticle*);
+
+	void setCacheParams(float, float);
 
 	PhysParticleCache* m_pParticleCache;
 	unsigned char field_0x4;
