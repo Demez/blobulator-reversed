@@ -6,7 +6,7 @@
 #include "blobulator/point3d.h"
 
 // 24 bits
-struct ImpParticle
+class ImpParticle
 {
 	Point3D center;			/* offset: 0	*/
 	float fieldRScaleSQ;	/* offset: 16	*/

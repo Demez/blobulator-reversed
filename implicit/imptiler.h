@@ -4,7 +4,7 @@
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/sweeprenderer.h"
 
-struct ImpTile;
+class ImpTile;
 class SweepRenderer;
 
 class ImpTiler
@@ -37,7 +37,7 @@ public:
 };
 
 // 68 bytes
-struct ImpTile
+class ImpTile
 {
 	ImpTile(int, int, int);
 	~ImpTile();

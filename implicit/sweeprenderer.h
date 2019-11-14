@@ -52,31 +52,6 @@ struct Slice_t
 	SmartArray<YZ, 0, 16> seed_list;		/* offset: 28	*/
 };
 
-DECL_ALIGN(2) struct vbId_t
-{
-	unsigned short time;
-	unsigned short id;
-};
-
-DECL_ALIGN(4) struct CornerInfo
-{
-	float value;
-	float normal[3];
-	vbId_t edges[3];
-	CornerInfo* next;
-	unsigned char x, y, z;
-	unsigned char dones;
-};
-
-DECL_ALIGN(4) struct IndexTriVertexBuffer
-{
-	unsigned short m_curTime;
-	unsigned short m_nVerticesOutput;
-	IMesh* m_pMesh;
-	CMeshBuilder* m_pBuilder;
-	unsigned short m_stat_no_flashes;
-};
-
 class SweepRenderer
 {
 #ifdef LINK_TEST

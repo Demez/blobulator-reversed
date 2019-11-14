@@ -4,7 +4,7 @@
 
 #include "blobulator/smartarray.h"
 
-struct ImpParticle;
+class ImpParticle;
 
 // NOTE: The following types I believe are accurate
 
@@ -42,14 +42,37 @@ struct PCacheSlice_t
 	PSliceData_t* sliceData;
 };
 
-struct CornerInfo;
-struct IndexTriVertexBuffer;
+DECL_ALIGN(2) struct vbId_t
+{
+	unsigned short time;
+	unsigned short id;
+};
+
+DECL_ALIGN(4) struct CornerInfo
+{
+	float value;
+	float normal[3];
+	vbId_t edges[3];
+	CornerInfo* next;
+	unsigned char x, y, z;
+	unsigned char dones;
+};
+
+DECL_ALIGN(4) class IndexTriVertexBuffer
+{
+	unsigned short m_curTime;
+	unsigned short m_nVerticesOutput;
+	IMesh* m_pMesh;
+	CMeshBuilder* m_pBuilder;
+	unsigned short m_stat_no_flashes;
+};
+
 class ProjectingParticleCache;
 
-typedef void (*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
-typedef void (*tCalcVertexFunc)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*);
+typedef void (__cdecl*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (__cdecl*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
+typedef void (__cdecl*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
+typedef void (__cdecl*tCalcVertexFunc)(float, float, float, int, CornerInfo* const, CornerInfo* const, IndexTriVertexBuffer*);
 
 #pragma warning(push, 0)
 const __m128 Four_Zeros;
