@@ -102,10 +102,10 @@ private:
 
 	void seed_surface(Point3D&);
 
-	static void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
-	static void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
-	static void setCalcSignFunc(tCalcSignFunc pfnSignFunc);
-	static void setCalcVertexFunc(tCalcVertexFunc pfnVertexFunc);
+	static void setCalcCornerFunc(CalcCornerFunc);
+	static void setCalcSign2Func(CalcSign2Func);
+	static void setCalcSignFunc(CalcSignFunc);
+	static void setCalcVertexFunc(CalcVertexFunc);
 
 	static void recalculateDimensions();
 

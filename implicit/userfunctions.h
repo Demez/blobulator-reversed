@@ -2,9 +2,9 @@
 
 // TODO: I don't know where these are actually meant to be defined
 
+#include "blobulator/implicit/projectingparticlecache.h"
+#include "blobulator/implicit/impparticle.h"
 #include "blobulator/smartarray.h"
-
-class ImpParticle;
 
 // NOTE: The following types I believe are accurate
 
@@ -58,6 +58,7 @@ DECL_ALIGN(4) struct CornerInfo
 	unsigned char dones;
 };
 
+// define in blobulator/vertexbuffers/indextrivertexbuffer.h
 DECL_ALIGN(4) class IndexTriVertexBuffer
 {
 	unsigned short m_curTime;
@@ -69,10 +70,10 @@ DECL_ALIGN(4) class IndexTriVertexBuffer
 
 class ProjectingParticleCache;
 
-typedef void (__cdecl*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (__cdecl*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
-typedef void (__cdecl*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
-typedef void (__cdecl*tCalcVertexFunc)(float, float, float, int, CornerInfo* const, CornerInfo* const, IndexTriVertexBuffer*);
+typedef void (__cdecl* CalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*);
+typedef void (__cdecl* CalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*);
+typedef bool (__cdecl* CalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
+typedef void (__cdecl* CalcVertexFunc)(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*);
 
 #pragma warning(push, 0)
 const __m128 Four_Zeros;
