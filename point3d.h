@@ -1,37 +1,39 @@
 #pragma once
 
 #include "tier0/platform.h"
+#include <xmmintrin.h>
 
-DECL_ALIGN(4) struct Point3D
+// Unfinished
+DECL_ALIGN(4) class Point3D
 {
 public:
 
 	Point3D();
 	Point3D(int, int, int);
 
-	Point3D* crossProduct(Point3D*);
-	float dot(Point3D*);
-	float length();
+	Point3D crossProduct(const Point3D&) const;
+	float dot(const Point3D&) const;
+	float length() const;
 
-	Point3D* mult(float);
-	Point3D* normalize();
+	Point3D& mult(float);
+	Point3D& normalize();
 
-	Point3D* operator*(float);
-	Point3D* operator+(Point3D*);
-	Point3D* operator-(Point3D*);
-	Point3D* operator/(Point3D*);
-	Point3D* operator/(float);
+	Point3D operator*(float) const;
+	Point3D operator+(const Point3D&) const;
+	Point3D operator-(const Point3D&) const;
+	Point3D operator/(Point3D*) const;
+	Point3D operator/(float) const;
 
-	float* operator[](int);
+	float& operator[](int);
 	const float operator[](int) const;
 
-	float unit();
+//	float unit();
 
-	void set(int, int, int);
-	
+	void set(float, float, float);
+
 	DECL_ALIGN(4) union
 	{
-		__m128 sse_vec;
+		__m128 sse_vec3;
 		float p[4];
 	};
 };

@@ -74,6 +74,7 @@ DECL_ALIGN(4) struct IndexTriVertexBuffer
 
 class SweepRenderer
 {
+	friend class main;
 public:
 	SweepRenderer();
 

@@ -50,3 +50,7 @@ typedef void (*tCalcCornerFunc)(unsigned char, unsigned char, unsigned char, flo
 typedef void (*tCalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo*, ProjectingParticleCache*);
 typedef void (*tCalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
 typedef void (*tCalcVertexFunc)(float, float, float, int, CornerInfo*, CornerInfo*, IndexTriVertexBuffer*);
+
+#pragma warning(push, 0)
+const __m128 Four_Zeros;
+#pragma warning(pop)
