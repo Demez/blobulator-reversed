@@ -95,9 +95,6 @@ public:
 
 	bool isParticleWithinBounds(ImpParticle*);
 
-	void recalculateBB();
-	void recalculateDimensions();
-
 	void render_slice(unsigned char, Slice_t*, Slice_t*, Slice_t*);
 	void render_slices();
 
@@ -120,10 +117,16 @@ public:
 
 	static void setOffset(Point3D*);
 
+private:
+
 	static void setCalcCornerFunc(tCalcCornerFunc pfnCornerFunc);
 	static void setCalcSign2Func(tCalcSign2Func pfnSign2Func);
 	static void setCalcSignFunc(tCalcSignFunc pfnSignFunc);
 	static void setCalcVertexFunc(tCalcVertexFunc pfnVertexFunc);
+
+	static void recalculateDimensions();
+
+	void recalculateBB();
 
 	ProjectingParticleCache* pCache;
 	IndexTriVertexBuffer* vertexBuffer;
