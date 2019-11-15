@@ -78,7 +78,7 @@ void __cdecl calcCornerNormalColorTanNoUV(unsigned char, unsigned char, unsigned
 void __cdecl calcCornerNormalColorUVTan(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
 
 void __cdecl calcSign2(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
-bool __cdecl calcSign(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*) {}
+bool __cdecl calcSign(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*) { return false;  }
 
 void __cdecl calcVertexNormal(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
 void __cdecl calcVertexNormalDebugColor(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}

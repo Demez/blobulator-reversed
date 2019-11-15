@@ -4,26 +4,27 @@
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/sweeprenderer.h"
 
+#ifdef LINK_TEST
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#endif
+
 class ImpTile;
 class SweepRenderer;
 
 class ImpTiler
 {
+#ifdef LINK_TEST
+	friend int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
+#endif
 public:
 	ImpTiler(SweepRenderer*);
 	~ImpTiler();
 
-	void addParticleToTile(ImpParticle*, int, int, int);
 	void insertParticle(ImpParticle*);
 
-	void beginFrame(Point3D*, void*, bool);
+	void beginFrame(Point3D&, void*, bool);
 	void endFrame(void);
-
-	ImpTile* createTile(int, int, int);
-	ImpTile* findTile(int, int, int);
-
-	Point3D calcTileCorner(int, int, int);
-	Point3D calcTileOffset(int, int, int);
 
 	void drawSurface(void);
 	void drawSurfaceSorted(Point3D&);
@@ -34,11 +35,19 @@ public:
 	int getNoTiles(void);
 	ImpTile* getTile(int);
 	Point3D getTileOffset(int);
+
+private:
+	void addParticleToTile(ImpParticle*, int, int, int);
+	ImpTile* findTile(int, int, int);
+	ImpTile* createTile(int, int, int);
+	Point3D calcTileCorner(int, int, int);
+	Point3D calcTileOffset(int, int, int);
 };
 
 // 68 bytes
 class ImpTile
 {
+public:
 	ImpTile(int, int, int);
 	~ImpTile();
 
