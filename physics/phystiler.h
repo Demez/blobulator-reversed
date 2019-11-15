@@ -3,6 +3,7 @@
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/physics/physparticlecache_inl.h"
 #include "blobulator/point3d.h"
+#include "blobulator/smartarray.h"
 
 // Do functions
 class PhysTilerFactory
@@ -11,18 +12,24 @@ class PhysTilerFactory
 };
 
 // TODO
-struct PhysTile
+class PhysTile
 {
 };
 
+class PhysTiler;
+
 // FINISH
-struct PhysTileIterator
+DECL_ALIGN(4) class PhysTileIterator
 {
-	PhysTilerIterator(PhysTiler*);
+	friend class PhysTiler; // the only constructor is private, so i assume only PhysTiler may use it
+public:
 	void reset();
 
+	int n;
+	PhysTiler* tiler;
+
 private:
-	PhysTileIterator(PhysTileIterator*); // no copy constructor
+	PhysTileIterator(PhysTiler*);
 };
 
 // Do functions
@@ -35,18 +42,11 @@ public:
 	PhysTileIterator* acquireIterator();
 	void releaseIterator(PhysTileIterator*);
 
-	void beginFrame(Point3D*);
+	void beginFrame(Point3D&);
 	void beginIteration();
 
 	void endFrame();
 	void endIteration();
-
-	PhysTile* createTile(int, int, int);
-
-	Point3D* calcTileCorner(int, int, int);
-	Point3D* calcTileOffset(int, int, int);
-
-	PhysTile* findTile(int, int, int);
 
 	PhysParticle* getNextParticleAndNeighbors(PhysParticle***, int*);
 
@@ -55,6 +55,15 @@ public:
 	void setCacheParams(float, float);
 
 	PhysParticleCache* m_pParticleCache;
+
+private:
+	PhysTile* createTile(int, int, int);
+	PhysTile* findTile(int, int, int);
+
+
+	Point3D calcTileCorner(int, int, int);
+	Point3D calcTileOffset(int, int, int);
+
 	unsigned char field_0x4;
 	unsigned char field_0x5;
 	unsigned char field_0x6;

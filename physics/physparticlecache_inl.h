@@ -2,7 +2,7 @@
 
 #include "blobulator/point3d.h"
 
-struct PhysParticle
+class PhysParticle
 {
 	Point3D center;
 	float radius;
@@ -22,18 +22,19 @@ public:
 
 	void calcNeighbors(PhysParticle*, PhysParticle***, int*);
 
-	Point3D* getInnerDimensions();
-	Point3D* getOuterDimensions();
+	Point3D getInnerDimensions();
+	Point3D getOuterDimensions();
 
-	void generateCheckList(float, float);
 	float getMarginWidth();
 
 	void insertParticle(PhysParticle*);
+	void setCacheParams(float, float);
+
+	void setOffset(Point3D&);
+
+private:
+	void generateCheckList(float, float);
 
 	void recalculateBB();
 	void recalculateDimensions();
-
-	void setCacheParams(float, float);
-
-	void setOffset(Point3D*);
 };

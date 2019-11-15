@@ -1,15 +1,20 @@
 #define LINK_TEST
 
 #include "blobulator/implicit/sweeprenderer.h"
+#include "blobulator/implicit/imptiler.h"
+#include "blobulator/physics/physparticlecache_inl.h"
+#include "blobulator/physics/phystiler.h"
 #include "blobulator/point3d.h"
 #include <windows.h>
 
 #pragma warning(push, 0)
 #pragma optimize("", off)
 
-#define IMPTILER_TEST
+//#define IMPTILER_TEST
 //#define SWEEPRENDERER_TEST
 //#define POINT3D_TEST
+//#define PHYSPARTICLECACHE_TEST
+#define PHYSTILER_TEST
 
 #if defined(SWEEPRENDERER_TEST)
 int WINAPI WinMain(
@@ -19,7 +24,6 @@ int WINAPI WinMain(
 	int nCmdShow             /* [input] show state of window */
 )
 {
-	SweepRenderer::changeRadii(0, 0);
 	SweepRenderer::getMarginNCubes();
 	SweepRenderer::getMarginWidth();
 	SweepRenderer::setCalcCornerFunc(0, nullptr);
@@ -36,35 +40,18 @@ int WINAPI WinMain(
 
 	SweepRenderer* sweep = new SweepRenderer();
 
-	sweep->recalculateBB();
-	sweep->recalculateDimensions();
-
 	ImpParticle particle;
 	sweep->addParticle(&particle, false);
-	sweep->changeCubeWidth(0);
 
 	sweep->isParticleWithinBounds(&particle);
 
-	sweep->seed_surface(Point3D());
-
-	Slice_t slice;
-	Slice_t slice2;
-	sweep->allocSliceCorners(&slice);
-	sweep->allocSliceTodoList(&slice2);
-	sweep->deallocSliceCorners(&slice);
-
 	sweep->setOffset(Point3D());
-
-	sweep->deallocSliceTodoList(&slice2);
 
 	sweep->beginFrame(false, nullptr);
 	sweep->endFrame();
 
-
 	sweep->beginTile(nullptr);
 	sweep->endTile();
-	sweep->render_slice(0, nullptr, nullptr, nullptr);
-	sweep->render_slices();
 }
 #elif defined(POINT3D_TEST)
 int WINAPI WinMain(
@@ -110,6 +97,38 @@ int WINAPI WinMain(
 	tiler->findTile(0, 0, 0);
 	tiler->getNoTiles();
 	tiler->insertParticle(&ImpParticle());
+}
+#elif defined(PHYSPARTICLECACHE_TEST)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	PhysParticleCache* cache = new PhysParticleCache(0, 0);
+	cache->beginFrame();
+	cache->endFrame();
+	cache->beginTile(0);
+	cache->endTile();
+	cache->calcNeighbors(&PhysParticle(), PhysParticle***, &int(0));
+	cache->getInnerDimensions();
+	cache->getMarginWidth();
+	cache->getOuterDimensions();
+	cache->insertParticle(&PhysParticle());
+	cache->setCacheParams(0, 0);
+	cache->setOffset(Point3D());
+}
+
+#elif defined(PHYSTILER_TEST)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	PhysParticleCache cache(0, 0);
+	PhysTiler* phys = new PhysTiler(&cache);
+
+	phys->acquireIterator();
+	phys->beginFrame(Point3D());
+	phys->beginIteration();
+	phys->endFrame();
+	phys->endIteration();
+//	phys->getNextParticleAndNeighbors(PhysParticle ***, &int(0));
+	phys->insertParticle(&PhysParticle());
+	phys->releaseIterator(phys->acquireIterator());
 }
 #endif
 

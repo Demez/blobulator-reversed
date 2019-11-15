@@ -10,11 +10,6 @@
 #include "blobulator/point3d.h"
 #include "blobulator/smartarray.h"
 
-#ifdef LINK_TEST
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#endif
-
 #ifndef RENDERER_CLASS
 #define RENDERER_CLASS SweepRenderer
 #endif
@@ -54,9 +49,6 @@ struct Slice_t
 
 class SweepRenderer
 {
-#ifdef LINK_TEST
-	friend int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
-#endif
 public:
 	SweepRenderer();
 
