@@ -70,6 +70,23 @@ DECL_ALIGN(4) class IndexTriVertexBuffer
 
 class ProjectingParticleCache;
 
+// get these functions from Portal 2 or Source Particle Benchmark
+void __cdecl calcCornerNormal(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+void __cdecl calcCornerNormalColor(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+void __cdecl calcCornerNormalHiFreqColor(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+void __cdecl calcCornerNormalColorTanNoUV(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+void __cdecl calcCornerNormalColorUVTan(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+
+void __cdecl calcSign2(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*) {}
+bool __cdecl calcSign(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*) {}
+
+void __cdecl calcVertexNormal(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+void __cdecl calcVertexNormalDebugColor(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+void __cdecl calcVertexNormalNColor(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+void __cdecl calcVertexNormalNColorTanNoUV(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+void __cdecl calcCornerNormalColorTanNoUV(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+void __cdecl calcVertexNormalNColorUVTan(float, float, float, int, const CornerInfo*, const CornerInfo*, IndexTriVertexBuffer*) {}
+
 typedef void (__cdecl* CalcCornerFunc)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*);
 typedef void (__cdecl* CalcSign2Func)(unsigned char, unsigned char, unsigned char, float, float, float, CornerInfo* const, ProjectingParticleCache*);
 typedef bool (__cdecl* CalcSignFunc)(unsigned char, unsigned char, unsigned char, float, float, float, ProjectingParticleCache*);
