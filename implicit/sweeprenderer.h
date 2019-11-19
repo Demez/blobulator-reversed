@@ -17,6 +17,7 @@
 // TODO: Find missing members of SweepRenderer (and maybe functions)
 // TODO: Remove these to their respective files
 
+#pragma warning(push, 0)
 DECL_ALIGN(4) union CubeInfo
 {
 	DECL_ALIGN(2) struct
@@ -26,6 +27,7 @@ DECL_ALIGN(4) union CubeInfo
 	};
 	unsigned int everything;
 };
+#pragma warning(pop)
 
 // 40 bits
 struct Slice_t
@@ -54,7 +56,7 @@ public:
 
 	void addParticle(ImpParticle*, bool);
 
-	void beginFrame(bool, void *);
+	void beginFrame(bool, void*);
 	void endFrame();
 
 	void beginTile(ImpTile*);
@@ -82,7 +84,6 @@ public:
 	static void setCalcSign2Func(CalcSign2Func);
 	static void setCalcSignFunc(CalcSignFunc);
 	static void setCalcVertexFunc(CalcVertexFunc);
-
 
 private:
 
@@ -170,25 +171,4 @@ private:
 	int n_alloced_slice_corners;
 	int n_alloced_slice_corner_infos;
 	int n_alloced_slice_todo_lists;
-
-/*	float oneOverCubewidth;
-	float oneOverThreshold;
-	float addAmt;
-	int cornerInfoSize;
-	float cubeWidth;
-	float cutoffR;
-	float cutoffRSq;
-	short fieldCalcSteps;
-	float threshold;
-	float renderR;
-	float scaledRenderRSq;
-	float scaler;
-	float scalerSq;
-
-private:
-	int marginNCubes;
-	float marginWidth;
-	Point3D outerDimensions;
-	Point3D innerDimensions;
-	bool tile_mode;*/
 };

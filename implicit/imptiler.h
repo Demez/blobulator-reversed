@@ -4,19 +4,11 @@
 #include "blobulator/implicit/impparticle.h"
 #include "blobulator/implicit/sweeprenderer.h"
 
-#ifdef LINK_TEST
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#endif
-
 class ImpTile;
 class SweepRenderer;
 
 class ImpTiler
 {
-#ifdef LINK_TEST
-	friend int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
-#endif
 public:
 	ImpTiler(SweepRenderer*);
 	~ImpTiler();
@@ -42,6 +34,50 @@ private:
 	ImpTile* createTile(int, int, int);
 	Point3D calcTileCorner(int, int, int);
 	Point3D calcTileOffset(int, int, int);
+
+	SweepRenderer* m_sweepRenderer;
+	unsigned char field_0x4;
+	unsigned char field_0x5;
+	unsigned char field_0x6;
+	unsigned char field_0x7;
+	unsigned char field_0x8;
+	unsigned char field_0x9;
+	unsigned char field_0xa;
+	unsigned char field_0xb;
+	unsigned char field_0xc;
+	unsigned char field_0xd;
+	unsigned char field_0xe;
+	unsigned char field_0xf;
+	int maxNoTilesToDraw;
+	unsigned char field_0x14;
+	unsigned char field_0x15;
+	unsigned char field_0x16;
+	unsigned char field_0x17;
+	unsigned char field_0x18;
+	unsigned char field_0x19;
+	unsigned char field_0x1a;
+	unsigned char field_0x1b;
+	unsigned char field_0x1c;
+	unsigned char field_0x1d;
+	unsigned char field_0x1e;
+	unsigned char field_0x1f;
+	Point3D last_tiles_offset;
+	Point3D offset;
+	Point3D render_dim;
+	float render_margin;
+	unsigned char field_0x54;
+	unsigned char field_0x55;
+	unsigned char field_0x56;
+	unsigned char field_0x57;
+	unsigned char field_0x58;
+	unsigned char field_0x59;
+	unsigned char field_0x5a;
+	unsigned char field_0x5b;
+	unsigned char field_0x5c;
+	unsigned char field_0x5d;
+	unsigned char field_0x5e;
+	unsigned char field_0x5f;
+	Point3D corner_offset;
 };
 
 // 68 bytes
@@ -80,8 +116,12 @@ public:
 class ImpTilerFactory
 {
 public:
-	ImpTilerFactory();
 
 	ImpTiler* getTiler();
 	void returnTiler(ImpTiler*);
+
+	static ImpTilerFactory* factory;
+
+private:
+	ImpTilerFactory();
 };

@@ -3,13 +3,12 @@
 #include "tier0/platform.h"
 #include <xmmintrin.h>
 
-// Unfinished
 DECL_ALIGN(4) class Point3D
 {
 public:
 
 	Point3D();
-	Point3D(int, int, int);
+	Point3D(float, float, float);
 
 	Point3D crossProduct(const Point3D&) const;
 	float dot(const Point3D&) const;
@@ -27,11 +26,9 @@ public:
 	float& operator[](int);
 	const float operator[](int) const;
 
-//	float unit();
-
 	void set(float, float, float);
 
-	DECL_ALIGN(4) union
+	/*DECL_ALIGN(4)*/ union
 	{
 		__m128 sse_vec3;
 		float p[4];
@@ -50,6 +47,5 @@ DECL_ALIGN(1) struct XYZ
 
 DECL_ALIGN(1) struct pcache_YZ_t
 {
-	unsigned char y;
-	unsigned char z;
+	unsigned char y, z;
 };

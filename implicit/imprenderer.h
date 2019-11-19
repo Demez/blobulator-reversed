@@ -9,30 +9,11 @@
 #define RENDERER_CLASS ImpRenderer
 #endif
 
-// TODO: Finish
-class ImpRendererFactory
+static class ImpRendererFactory
 {
 public:
 	ImpRendererFactory();
 
 	SweepRenderer* getRenderer();
 	void returnRenderer(SweepRenderer*);
-};
-
-// TODO: Finish
-class ImpRenderer : public RenderableInstance_t
-{
-public:
-	bool setCalcSignFunc(int math);
-
-	void beginFrame(bool draw, void* renderCon);
-	void setOffset(Point3D point);
-	void setMaxNoSlicesToDraw(int many);
-	void addParticle(ImpParticle* particle);
-	void endTile();
-	void endFrame();
-
-	int getLastSliceDrawn();
-	int getMarginNCubes();
-	int getCubeWidth();
-};
+} factory;

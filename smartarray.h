@@ -2,18 +2,11 @@
 
 #pragma once
 
+#include "tier0/platform.h"
+
 #include <malloc.h>
 #include <memory.h>
 #include <stdio.h>
-#include <assert.h>
-
-
-// The following define controls whether ASSERTS will be enabled
-// in a debug build. It should have no effect on Release builds
-// since asserts are not compiled in release builds.
-#ifdef _DEBUG
-	#define ASSERT_SMART_ARRAY
-#endif
 
 #define KEEP_MAX_SIZE 0
 
@@ -45,9 +38,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		{
 			if(sse_align) a = (T*)_aligned_malloc(capacity * sizeof(T), 16);
 			else a = (T*)malloc(capacity * sizeof(T));
-			#ifdef ASSERT_SMART_ARRAY
 			assert(a);
-			#endif
 		}
 		else
 		{
@@ -57,9 +48,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 
 	~SmartArray()
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(initialCapacity == 0 || a);
-		#endif
 		free(a);
 	}
 
@@ -70,7 +59,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		a = (T*)malloc(capacity * sizeof(T));
 	}*/
 
-	__forceinline void ensureCapacity(int c)
+	FORCEINLINE void ensureCapacity(int c)
 	{
 		if(capacity < c)
 		{
@@ -89,14 +78,12 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 			{
 				a = (T*)realloc(a, capacity * sizeof(T));
 			}
-			#ifdef ASSERT_SMART_ARRAY
 			assert(a);
-			#endif
 		}
 	}
 
 	// Make sure we can add c more elements to the array
-	__forceinline void ensureAdditionalCapacity(int c)
+	FORCEINLINE void ensureAdditionalCapacity(int c)
 	{
 		c += size;
 		if(capacity < c)
@@ -114,13 +101,11 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 			{
 				a = (T*)realloc(a, capacity * sizeof(T));
 			}
-			#ifdef ASSERT_SMART_ARRAY
 			assert(a);
-			#endif
 		}
 	}
 
-	__forceinline void resize(int c)
+	FORCEINLINE void resize(int c)
 	{
 		capacity = c;
 		if(sse_align)
@@ -135,33 +120,25 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		{
 			a = (T*)realloc(a, capacity * sizeof(T));
 		}
-		#ifdef ASSERT_SMART_ARRAY
 		assert(a);
-		#endif
 	}
 
-	__forceinline T& operator[] (int i)
+	FORCEINLINE T& operator[] (int i)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(i >= 0 && i < capacity);
-		#endif
 		return a[i];
 	}
 
-	__forceinline void put(int i, const T& e)
+	FORCEINLINE void put(int i, const T& e)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(i >= 0 && i < size);
-		#endif
 		a[i] = e;
 	}
 
 	/*
-	__forceinline void putAutoSize(int i, const T& e)
+	FORCEINLINE void putAutoSize(int i, const T& e)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(i >= 0);
-		#endif
 		if(i >= size)
 		{
 			size = i + 1;
@@ -171,11 +148,9 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	}
 	*/
 
-	__forceinline void push(const T& e)
+	FORCEINLINE void push(const T& e)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(size < capacity);
-		#endif
 		a[size] = e;
 		size ++;
 	}
@@ -184,29 +159,21 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	// than passing in data, you want to just get a pointer
 	// or a reference to it so that you can then write
 	// directly into that item. That's what this function is for.
-	__forceinline T& push()
+	FORCEINLINE T& push()
 	{
-		#ifdef ASSERT_SMART_ARRAY
-		if(size >= capacity)
-		{
-			printf("Error!!!\n");
-		}
 		assert(size < capacity);
-		#endif
 		return a[size++];
 	}
 
-	__forceinline void push2(const T& e1, const T& e2)
+	FORCEINLINE void push2(const T& e1, const T& e2)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(size < capacity);
-		#endif
 		a[size] = e1;
 		a[size+1] = e2;
 		size += 2;
 	}
 
-	__forceinline void push2AutoSize(const T& e1, const T& e2)
+	FORCEINLINE void push2AutoSize(const T& e1, const T& e2)
 	{
 		if(size+1 >= capacity)
 		{
@@ -217,7 +184,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		size += 2;
 	}
 
-	__forceinline void pushAutoSize(const T& e)
+	FORCEINLINE void pushAutoSize(const T& e)
 	{
 		if(size >= capacity)
 		{
@@ -228,7 +195,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	}
 
 	// This is analogous to the push() function
-	__forceinline T& pushAutoSize()
+	FORCEINLINE T& pushAutoSize()
 	{
 		if(size >= capacity)
 		{
@@ -237,29 +204,23 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		return a[size++];
 	}
 
-	__forceinline T& pop(void)
+	FORCEINLINE T& pop(void)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(size >= 1);
-		#endif
 		return a[--size];
 	}
 
-	__forceinline void pop2(T& e1, T& e2)
+	FORCEINLINE void pop2(T& e1, T& e2)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(size >= 1);
-		#endif
 		e1 = a[size-2];
 		e2 = a[size-1];
 		size -= 2;
 	}
 
-	__forceinline void remove(int i)
+	FORCEINLINE void remove(int i)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(i >= 0 && i < size);
-		#endif
 		for( ;i < size-1; i++)
 		{
 			a[i] = a[i+1];
@@ -267,11 +228,9 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		size--;
 	}
 
-	__forceinline T removeAndReturn(int i)
+	FORCEINLINE T removeAndReturn(int i)
 	{
-		#ifdef ASSERT_SMART_ARRAY
 		assert(i >= 0 && i < size);
-		#endif
 		T removed = a[i];
 		for( ;i < size-1; i++)
 		{
@@ -281,7 +240,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		return removed;
 	}
 
-	__forceinline int find(const T& e)
+	FORCEINLINE int find(const T& e)
 	{
 		for(int i = 0; i < size; i++)
 		{
@@ -290,7 +249,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		return -1;
 	}
 
-	__forceinline bool findAndRemove(const T& e)
+	FORCEINLINE bool findAndRemove(const T& e)
 	{
 		int i = find(e);
 		if(i == -1)
@@ -304,19 +263,19 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		}
 	}
 
-	__forceinline void findAndRemoveAll(const T& e)
+	FORCEINLINE void findAndRemoveAll(const T& e)
 	{
 		while(findAndRemove(e) == true) {};
 	}
 
 	// Get the last item
-	__forceinline T& last()
+	FORCEINLINE T& last()
 	{
 		return a[size-1];
 	}
 
 	template <class C>
-	__forceinline bool testSort()
+	FORCEINLINE bool testSort()
 	{
 		for(int i = 0; i < size-1; i++)
 		{
@@ -326,7 +285,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	}
 
 	// TODO: Should try using swap in sort
-	__forceinline void swap(int i, int j)
+	FORCEINLINE void swap(int i, int j)
 	{
 		T t = a[i]; a[i] = a[j]; a[j] = t;
 	}
@@ -337,7 +296,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	// and reverse sorted arrays. It also does well on arrays that
 	// contain many duplicate values.
 	template <class C>
-	__forceinline void sort()
+	FORCEINLINE void sort()
 	{
 		if(size == 2)
 		{
@@ -371,7 +330,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	void sort(int lo0, int hi0)
 	{
 		//depth ++;
-		//printf("x %d %d %d\n", lo0, hi0, depth);
+		//DevMsg("x %d %d %d\n", lo0, hi0, depth);
 		//fflush(stdout);
 
 		SORT_STATIC int c0;
@@ -387,7 +346,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		// the size should not be less than 3
 		if(hi0 - lo0 <= 2) return;
 
-		//printf("%d %d %d\n", a[lo0], a[c0], a[hi0]);
+		//DevMsg("%d %d %d\n", a[lo0], a[c0], a[hi0]);
 		
 		// Find the value of the pivot and swap out the pivot to the end of the array
 		// We don't explicitly need to store the pivot in the end of the array because
@@ -473,7 +432,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 	}
 
 
-	__forceinline void shuffle(int first = INT_MIN, int last = INT_MIN)
+	FORCEINLINE void shuffle(int first = INT_MIN, int last = INT_MIN)
 	{
 		if(first == INT_MIN && last == INT_MIN) { first = 0; last = size-1; }
 
@@ -502,7 +461,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 			}
 			if(iters > 1)
 			{
-				printf("Iters greater than 1\n");
+				DevMsg("Iters greater than 1\n");
 			}
 
 			// Swap the next item on the list with any of the preceeding items, including itself.
@@ -516,7 +475,7 @@ template <class T, bool sse_align = false, int initialCapacity = 16> class Smart
 		}
 	}
 
-	__forceinline void swapData(SmartArray<T, sse_align, initialCapacity>& other)
+	FORCEINLINE void swapData(SmartArray<T, sse_align, initialCapacity>& other)
 	{
 		T* tempa = a;
 		a = other.a;
